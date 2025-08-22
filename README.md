@@ -113,7 +113,7 @@ src/
 
 ```typescript
 const routes: Routes = [
-  { path: '', component: CategoryListComponent },
+  { path: "", redirectTo: "category", pathMatch: "full" },
   { path: 'category', component: CategoryListComponent },
   { path: 'category/:categoryName', component: ProductListComponent },
   { path: 'category/:categoryName/product/:productId', component: ProductDetailComponent },
