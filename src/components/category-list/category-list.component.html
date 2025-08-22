@@ -1,1 +1,27 @@
-<p>category-list works!</p>
+<div class="container-fluid bg-dark text-white d-flex flex-column min-vh-100 py-5">
+    <h1 class="mb-4 text-center">
+        <i class="fas fa-th-list me-2"></i> Product Categories
+    </h1>
+
+    <!-- Center content vertically -->
+    <div class="flex-grow-1 d-flex align-items-center">
+        <div class="row justify-content-center w-100">
+            @for (category of categories; track $index) 
+            {
+                <div class="col-md-4 mb-3">
+                    <a [routerLink]="['/category', category]" routerLinkActive="active" class="text-decoration-none">
+                        <div class="card bg-secondary text-white shadow-sm text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-folder-open fa-3x mb-3"></i>
+                                <h5 class="card-title">{{ category }}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }@empty
+            {
+                <p class="text-center">No categories available.</p>
+            }
+        </div>
+    </div>
+</div>
