@@ -1,1 +1,49 @@
-<p>product-list works!</p>
+<div class="container-fluid bg-dark text-white d-flex flex-column min-vh-100 py-5">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav mb-4">
+        <a routerLink="/" class="text-white text-decoration-none">
+            <i class="fas fa-home me-1"></i>Categories
+        </a>
+        <span class="text-white ms-2">></span>
+        <span class="text-white ms-2">{{ category }}</span>
+    </nav>
+
+    <h2 class="mb-4 text-capitalize">
+        <i class="fas fa-box-open me-2"></i> Products in {{ category }}
+    </h2>
+
+    <!-- If there are products -->
+    <div class="row g-4" *ngIf="products.length > 0; else noProducts">
+        <div class="col-md-4" *ngFor="let product of products; let i = index">
+            <div class="card h-100 shadow-sm bg-secondary text-light">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-tag me-2"></i>Name : {{ product.name }}
+                    </h5>
+                    <p class="fw-bold text-info">
+                        <i></i>Price :
+                        {{ product.price | currency:'USD':'symbol':'1.2-2' }}
+                    </p>
+                </div>
+                <div class="card-footer text-center bg-dark">
+                    <button class="btn btn-sm btn-outline-light"
+                        [routerLink]="['/category', category, 'product', product.id]">
+                        <i class="fas fa-eye me-1"></i> View product details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template for empty list -->
+    <ng-template #noProducts>
+        <div class="alert alert-info bg-dark border-light text-light text-center">
+            <i class="fas fa-info-circle me-1"></i> No products found for this category.
+        </div>
+    </ng-template>
+
+    <!-- Back to categories -->
+    <button class="btn btn-sm btn-outline-light m-auto mt-4" [routerLink]="['/category']">
+        <i class="fa-solid fa-person-walking-arrow-loop-left"></i> Back to categories
+    </button>
+</div>

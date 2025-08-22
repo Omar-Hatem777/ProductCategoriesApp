@@ -1,1 +1,51 @@
-<p>product-detail works!</p>
+<div class="container-fluid bg-dark text-white d-flex flex-column min-vh-100 py-5">
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb-nav mb-4" *ngIf="product">
+            <a routerLink="/" class="text-white text-decoration-none">
+                <i class="fas fa-home me-1"></i>Categories
+            </a>
+            <span class="text-white ms-2">></span>
+            <a [routerLink]="['/category', product.category]" class="text-white text-decoration-none">
+                {{ product.category }}
+            </a>
+            <span class="text-white ms-2">></span>
+            <span class="text-white ms-2">{{ product.name }}</span>
+        </nav>
+
+        <div *ngIf="product; else notFound" class="card bg-secondary text-white shadow-lg border-0 rounded-4 p-4">
+            <div class="card-body">
+                <h2 class="card-title mb-4 text-center">
+                    <i class="fa-solid fa-box-open me-2"></i>{{ product?.name }}
+                </h2>
+                <hr class="border-light" />
+
+                <p class="mb-3 fs-5">
+                    <i class="fa-solid fa-align-left me-2"></i>{{ product?.description }}
+                </p>
+                <p class="mb-3 fs-5">
+                    <i class="fa-solid fa-dollar-sign me-2"></i><strong>Price:</strong> {{ product?.price | currency:'USD':'symbol':'1.2-2' }}
+                </p>
+                <p class="mb-4 fs-5">
+                    <i class="fa-solid fa-layer-group me-2"></i><strong>Category:</strong> {{ product?.category }}
+                </p>
+                <div class="text-center">
+                    <a routerLink="/products" class="btn btn-outline-light btn-lg px-4" [routerLink]="['/category', product?.category]">
+                        <i class="fa-solid fa-arrow-left me-2"></i>Back to Products
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #notFound>
+            <div class="alert alert-danger mt-5 text-center fs-5 shadow-sm" role="alert">
+                <i class="fa-solid fa-triangle-exclamation me-2"></i>Product not found.
+            </div>
+            <div class="text-center mt-4">
+                <a routerLink="/" class="btn btn-outline-light btn-lg px-4">
+                    <i class="fa-solid fa-arrow-left me-2"></i>Back to Categories
+                </a>
+            </div>
+        </ng-template>
+    </div>
+</div>
